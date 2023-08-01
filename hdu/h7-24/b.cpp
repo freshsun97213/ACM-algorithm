@@ -6,6 +6,9 @@
 #define ll long long
 const int N = 1e5 + 10;
 
+int n2[1000] = {1,   2,    4,    8,    16,   32,    64,    128,   256,
+                512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072};
+
 using namespace std;
 
 ll a[N];
@@ -35,7 +38,7 @@ int main() {
       }
     }
     cout << sum << endl;
-    cerr << "\n" << (double)clock() / CLOCKS_PER_SEC * 1000 << "MS" << endl;
+    // cerr << "\n" << (double)clock() / CLOCKS_PER_SEC * 1000 << "MS" << endl;
   }
 
   return 0;
