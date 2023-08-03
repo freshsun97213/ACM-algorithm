@@ -1,4 +1,7 @@
+#pragma optimize(2)
+
 #include <algorithm>
+#include <ctime>
 #include <iostream>
 #include <map>
 #include <set>
@@ -14,6 +17,7 @@ using namespace std;
 //
 int main() {
   int n;
+
   ios::sync_with_stdio(false);
   cin.tie(0);
   string ss;
@@ -21,16 +25,19 @@ int main() {
   set<string> st;
   sort(ss.begin(), ss.end());
   do {
-    st.insert(ss);
+    st.emplace(ss);
   } while (next_permutation(ss.begin(), ss.end()));
 
   for (auto x : st) {
+    // cout << x << endl;
+
     // if (x.second) {
     printf("%s\n", x.c_str());
     //}
   }
-  cout << st.size();
+  // cout << st.size() << endl;
 
+  // cout << clock() * 1000 / CLOCKS_PER_SEC << " " << endl;
   return 0;
 }
 
