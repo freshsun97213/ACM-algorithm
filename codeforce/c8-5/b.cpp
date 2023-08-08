@@ -19,18 +19,19 @@ int main() {
     for (int i = 0; i < n; i++) {
       ll a;
       cin >> a;
-      sum += a;
+      if (a != 1)
+        sum += a;
       mp[a]++;
-      mx = max(mx, mp[a]);
+      // mx = max(mx, mp[a]);
     }
 
     if (n == 1) {
       cout << "NO" << endl;
       continue;
     }
-
+    // de(mp[1]);
     // mp[1] + n <= sum;
-    if (sum <= mp[1] * 2) {
+    if (sum < n) {
       cout << "NO" << endl;
     } else {
       cout << "YES" << endl;
