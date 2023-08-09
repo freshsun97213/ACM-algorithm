@@ -17,10 +17,10 @@ int main() {
     cin >> a[i];
   }
   build(1, n, 1);
-  // for (int i = 1; i <= 4 * n; i++) {
-  //   cout << tree[i] << " ";
-  // }
-  //
+  for (int i = 1; i <= 4 * n; i++) {
+    cout << tree[i] << " ";
+  }
+
   for (int i = 0; i < m; i++) {
     int op, x, y, k;
     cin >> op;
@@ -32,16 +32,25 @@ int main() {
       cout << find(x, y, 1, n, 1) << endl;
     }
   }
+  for (int i = 1; i <= 4 * n; i++) {
+    cout << tree[i] << " ";
+  }
+
   return 0;
 }
 ll find(int x, int y, int l, int r, int index) {
   if (x <= l && r <= y) {
     // cout << "root";
     // de(index);
+    tree[index] += lazy[index] * (r - l + 1);
+    lazy[index * 2 + 1] += lazy[index];
+    lazy[index * 2] += lazy[index];
+    lazy[index] = 0;
+
     return tree[index];
   }
   int m = l + ((r - l) >> 1);
-  if (lazy[index] && r != l) {
+  if (lazy[index]) {
     tree[index * 2] += (m - l + 1) * lazy[index];
     tree[index * 2 + 1] += (r - m) * lazy[index]; // 因为右边界是m+1的状态
     // 所以，那个应该是r-m  而非（r-m+1） 原式子应该是 r-（m + 1） + 1;《=》r-m;
@@ -67,7 +76,9 @@ ll find(int x, int y, int l, int r, int index) {
 void _p(int x, int y, int l, int r, int index, int k) {
   if ((x <= l && r <= y)) {
     tree[index] += k * (r - l + 1);
-    lazy[index] += k;
+    lazy[index * 2] += k;
+    lazy[index * 2 + 1] += k;
+    lazy[index] = 0;
     // 一旦识别到完全符合的区间就返回，不再进行往下寻找，
     // 除非最后需要寻找的区间是在lazy标记下面的区间里面
     // 而这一块的操作是放在了，后面区间查询里面
@@ -75,9 +86,9 @@ void _p(int x, int y, int l, int r, int index, int k) {
     return;
   }
   int m = l + ((r - l) >> 1);
-  if (lazy[index] && l != r) {
+  if (lazy[index]) {
     tree[index * 2] += lazy[index] * (m - l + 1);
-    tree[index * 2 + 1] += lazy[index] * (r - m + 1);
+    tree[index * 2 + 1] += lazy[index] * (r - m);
     lazy[index * 2] += lazy[index];
     lazy[index * 2 + 1] += lazy[index];
     lazy[index] = 0;
