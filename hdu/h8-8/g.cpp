@@ -2,7 +2,7 @@
 #define ll long long
 #define de(x) cerr << #x << " " << x << endl;
 using namespace std;
-const int N = 4e6 + 10;
+const int N = 4e7 + 10;
 ll a[N], tree[N], lazy[N];
 void _p(int x, int y, int l, int r, int index, int k);
 
@@ -17,10 +17,6 @@ int main() {
     cin >> a[i];
   }
   build(1, n, 1);
-  for (int i = 1; i <= 4 * n; i++) {
-    cout << tree[i] << " ";
-  }
-
   for (int i = 0; i < m; i++) {
     int op, x, y, k;
     cin >> op;
@@ -32,21 +28,10 @@ int main() {
       cout << find(x, y, 1, n, 1) << endl;
     }
   }
-  for (int i = 1; i <= 4 * n; i++) {
-    cout << tree[i] << " ";
-  }
-
   return 0;
 }
 ll find(int x, int y, int l, int r, int index) {
   if (x <= l && r <= y) {
-    // cout << "root";
-    // de(index);
-    tree[index] += lazy[index] * (r - l + 1);
-    lazy[index * 2 + 1] += lazy[index];
-    lazy[index * 2] += lazy[index];
-    lazy[index] = 0;
-
     return tree[index];
   }
   int m = l + ((r - l) >> 1);
@@ -58,11 +43,11 @@ ll find(int x, int y, int l, int r, int index) {
     lazy[index * 2 + 1] += lazy[index];
     lazy[index] = 0;
   }
-  int sum = 0;
+  ll sum = 0;
   if (x <= m) {
     // cout << "x";
     // de(index);
-    sum = find(x, y, l, m, index * 2);
+    sum += find(x, y, l, m, index * 2);
   }
   if (y > m) {
     // cout << "y";
@@ -76,17 +61,18 @@ ll find(int x, int y, int l, int r, int index) {
 void _p(int x, int y, int l, int r, int index, int k) {
   if ((x <= l && r <= y)) {
     tree[index] += k * (r - l + 1);
-    lazy[index * 2] += k;
-    lazy[index * 2 + 1] += k;
-    lazy[index] = 0;
+    // lazy[index * 2] += k + lazy[index];
+    // lazy[index * 2 + 1] += k + lazy[index];
+    lazy[index] += k; // 只有区间修改的时候，才需要标记下放。？
     // 一旦识别到完全符合的区间就返回，不再进行往下寻找，
     // 除非最后需要寻找的区间是在lazy标记下面的区间里面
     // 而这一块的操作是放在了，后面区间查询里面
-
     return;
   }
   int m = l + ((r - l) >> 1);
-  if (lazy[index]) {
+  if (lazy[index]) { // 这里模板是给出了 s！=t的条件的，但是，其实好像没关系
+    // 因为树长不会更改，他的标记在无法探测到的地方，
+    // 但是可能会导致下标越界
     tree[index * 2] += lazy[index] * (m - l + 1);
     tree[index * 2 + 1] += lazy[index] * (r - m);
     lazy[index * 2] += lazy[index];
