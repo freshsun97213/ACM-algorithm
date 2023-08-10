@@ -3,7 +3,7 @@
 #define int long long
 #define de(x) cerr << #x << " " << x << endl;
 using namespace std;
-const int N = 1e6 + 10;
+const int N = 1e7 + 10;
 int d[N], a[N];
 void build(int l, int r, int p) {
   if (l == r) {
@@ -13,7 +13,7 @@ void build(int l, int r, int p) {
   int m = l + ((r - l) >> 1);
   build(l, m, p << 1);
   build(m + 1, r, p << 1 | 1);
-  d[p] = max(d[p * 2], d[p * 2 + 1]);
+  d[p] = max(d[p << 1], d[p << 1 | 1]);
   return;
 }
 int query(int x, int y, int l, int r, int p);
@@ -30,13 +30,15 @@ signed main() {
     //   cout << d[i] << " ";
     // }
     for (int i = 0; i < m; i++) {
-      char c = getchar();
+      // char c = getchar();
+      string s;
       int x, y;
-      scanf("%c %lld %lld", &c, &x, &y);
+      cin >> s;
+      scanf(" %lld %lld", &x, &y);
       // de(c) de(x) de(y);
-      if (c == 'Q') {
+      if (s == "Q") {
         cout << query(x, y, 1, n, 1) << endl;
-      } else if (c == 'U') {
+      } else if (s == "U") {
         change(x, 1, n, 1, y);
         // for (int i = 2; i <= 4 * n; i++) {
         //   cout << d[i] << " ";
@@ -78,6 +80,6 @@ void change(int x, int l, int r, int p, int k) {
   } else {
     change(x, m + 1, r, p << 1 | 1, k);
   }
-  d[p] = max(d[p * 2], d[p * 2 + 1]);
+  d[p] = max(d[p << 2], d[p << 1 | 1]);
   return;
 }
