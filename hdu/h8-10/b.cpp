@@ -4,29 +4,28 @@
 #define int ll
 using namespace std;
 const int N = 2e5 + 10;
-ll tree[N], a[N], mx;
+ll tree[2][N], a[N], mx;
 int lowbit(int x) { return x & (-x); }
 // 点x掌管的区间是[x - log2（lowbit（x））, x];
-int sum(int x) { //   TLE 了
+int sum(int x, int odd) { //   TLE 了
   int ans = 0;
   for (; x; x -= lowbit(x)) {
-    ans += tree[x];
+    ans ^= tree[odd][x];
   }
   return ans;
 }
-void update(int x, int k) {
+void update(int x, int k, int odd) {
   // int cha = sum(x) - sum(x - 1);
   for (; x <= N; x += lowbit(x)) {
-    tree[x] += k;
+    tree[odd][x] ^= k;
   }
 }
-void update2(int x, int k) {
-  int cha = sum(x) - sum(x - 1);
+void update2(int x, int k, int odd) {
+  int cha = sum(x, odd) ^ sum(x - 1, odd);
   for (; x <= N; x += lowbit(x)) {
-    tree[x] += k - cha;
+    tree[odd][x] ^= k ^ cha;
   }
 }
-
 // 需要进行离散化 （不能够）
 // 其实头和尾部的异或的结果都是0，是无所谓的
 // 其次只要是区间是偶数个的时候，区间异或直接就等于零了
@@ -38,22 +37,20 @@ signed main() {
   // cout << lowbit(n) << " " << lowbit(m);
   for (int i = 1; i <= n; i++) {
     cin >> a[i];
-    update(i, a[i]);
+    update(i, a[i], i % 2);
   }
 
   for (int i = 1; i <= m; i++) {
     int op, x, y;
     cin >> op >> x >> y;
     if (op == 1) {
-      update2(x, y);
+      update2(x, y, x % 2);
     } else {
-      if ((y - x + 1) % 2 == 0) {
+      if ((x + y) & 1) {
         cout << "0" << endl;
       } else {
         ll a = 0;
-        for (; x <= y; x += 2) {
-          a ^= (sum(x) - sum(x - 1));
-        }
+        a ^= (sum(y, y % 2) ^ sum(x - 1, x % 2));
         cout << a << endl;
       }
     }
@@ -61,3 +58,53 @@ signed main() {
 
   return 0;
 }
+// ll tree[N], a[N], mx;
+// int lowbit(int x) { return x & (-x); }
+//
+// int sum(int x) { //   TLE 了
+//   int ans = 0;
+//   for (; x; x -= lowbit(x)) {
+//     ans += tree[x];
+//   }
+//   return ans;
+// }
+// void update(int x, int k) {
+//   for (; x <= N; x += lowbit(x)) {
+//     tree[x] += k;
+//   }
+// }
+// void update2(int x, int k) {
+//   int cha = sum(x) - sum(x - 1);
+//   for (; x <= N; x += lowbit(x)) {
+//     tree[x] += k - cha;
+//   }
+// }
+// signed main() {
+//   int n, m;
+//   cin >> n >> m;
+//   // cout << lowbit(n) << " " << lowbit(m);
+//   for (int i = 1; i <= n; i++) {
+//     cin >> a[i];
+//     update(i, a[i]);
+//   }
+//
+//   for (int i = 1; i <= m; i++) {
+//     int op, x, y;
+//     cin >> op >> x >> y;
+//     if (op == 1) {
+//       update2(x, y);
+//     } else {
+//       if ((y - x + 1) % 2 == 0) {
+//         cout << "0" << endl;
+//       } else {
+//         ll a = 0;
+//         for (; x <= y; x += 2) {
+//           a ^= (sum(x) - sum(x - 1));
+//         }
+//         cout << a << endl;
+//       }
+//     }
+//   }
+//
+//   return 0;
+// }
