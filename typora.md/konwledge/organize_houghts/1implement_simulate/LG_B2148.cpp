@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include<climits>
 using namespace std;
 
 double f(double x, double n) {
@@ -10,6 +10,8 @@ double f(double x, double n) {
   sum += x / (f(x, n - 1) + n);
   return sum;
 }
+
+
 
 int main() {
   double x, n;
