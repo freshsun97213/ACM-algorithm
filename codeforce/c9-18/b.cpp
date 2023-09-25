@@ -38,16 +38,8 @@ int main(){
         for(int i =0 ;i < n ;i ++){
             scanf("%d",&a[i]);
             x1 ^= a[i];
-            // ff(a[i]);
-        }
-        // for(int1 i =0;i < 40;i ++){cout << aa[i] <<" " << i <<" ";}
-
-        // for(int i =0;i < 40;i ++){aa[i] %=2;}
-        // int mm = 0;
-        for(int i = 0;i < m;i ++){
-            scanf("%d",&b[i]);
-            // mm = max(mm,cmpless(b[i],n % 2));
-        }
+         }
+        for(int i = 0;i < m;i ++){scanf("%d",&b[i]);}
         x = x1;
         for(int i =0 ;i < n ;i ++){
             if(n & 1){//奇数

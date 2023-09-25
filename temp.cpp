@@ -4,6 +4,7 @@
 #pragma GCC optimize ("Ofast,unroll-loops")
 #pragma GCC optimize("no-stack-protector,fast-math")
 #include<bits/stdc++.h>
+#include<climits>
 using namespace std;
 #ifndef lowbit
 #define lowbit(x) (x & (-x))
@@ -342,7 +343,7 @@ public:
      
 public:
     UF(int _n): n(_n), comp_cnt(_n), fa(_n), sz(_n, 1) {
-        iota(fa.begi/n(), fa.end(), 0);
+        iota(fa.begin(), fa.end(), 0);
     }
      
     int findset(int x) {
@@ -393,5 +394,7 @@ int main(){
   //
   //  
   //
-  //
+  int a = INT_MAX,b= INT_MIN;
+  cout << a << endl<<b;
+
 }
