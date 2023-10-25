@@ -1,40 +1,47 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-int main(){
-    int n;
-    string s,s1 = ""; 
-    cin >> n >> s;
-    s1 = s + s;
-    s = "";
-    int f = 1 ,cnt = 0,ans = 0;
-    while(f){
-        f = 0,cnt = 0;
-        for(int i = 0;i < 2*n;i ++){
-            if(s1[i] == s1[i + 1]){
-                cnt ++;
-                i ++;
-                f = 1;
-            }else{
-                s += s1[i];
-            }
-            s1= s;
-            s = "";
-        }
-        if(cnt % 2){ans += cnt / 2 + 1; }
-        else {ans += cnt / 2; }
-    
+int main() {
+  string s, s1;
+  int f = 1, n, cnt = 0;
+  cin >> n >> s;
+  // cout <<s[4];
+  // while(f){
+  f = 0;
+  for (int i = 0; i < s.size() - 1; i++) {
+    if (s[i] == s[i + 1]) {
+      i++;
+      f = 1;
+      cnt += 2;
+    } else {
+      s1 += s[i];
     }
-    cout << ((ans > n) ? n : ans ) << endl; 
+  }
+  int len = s.size();
+  // cout << len<<endl;
+  s1 = s1 + s[len - 1];
 
-    return 0;
+  // cout <<s1 <<endl;
+  // cout << s1.back()<<" "<<s1.front()<<endl;
+  while (s1.size() > 1 && (s1.back() == s1.front())) {
+    // cout << s1.size() << endl;
+    s1.erase(s1.size() - 1, 1);
+    // cout << 44 << s1.size() << endl;
+    s1.erase(0, 1);
+    // cout << 33 << s1.size() << endl;
+    // cout << s1 <<endl;
+    //     cout << cnt<<" " << s1.size() <<endl;
+    cnt += 2;
+    //    f = 1;
+  }
+  // s=s1;
+  // s1="";
+  //}
+  cout << cnt;
+  return 0;
 }
-
-
-
-
 
 // #include<iostream>
 // #include<string>
@@ -66,7 +73,7 @@ int main(){
 //             while(a[i%n])i ++;
 //             i %= n;
 //         }
-    
+
 //     }
 
 //     cout << cnt <<endl;
