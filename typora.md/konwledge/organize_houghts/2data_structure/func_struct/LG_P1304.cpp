@@ -48,15 +48,13 @@ int main(){
 
 
     /*   LG_P1304   */
-    // for(int i = 4;i <= n ;i +=2){
-    //     for(int j = 0;j < pri.size()&&pri[j] < i;j ++){
-    //         if(pri[j] && ispri(i -pri[j])){
-    //             cout << i <<"="<<pri[j] <<"+"<<i-pri[j]<<endl;
-    //             break;
-    //             // continue;
-    //         }
-    //     }
-    //     // i ++;
-    // }
+    for(int i = 4;i <= n ;i +=2){
+        for(int j = 0;j < pri.size()&&pri[j] < i;j ++){
+            if(pri[j] && ispri(i -pri[j])){
+                cout << i <<"="<<pri[j] <<"+"<<i-pri[j]<<endl;
+                break;
+            }
+        }
+    }
     return 0;
 }
