@@ -11,7 +11,7 @@ void func(int x,int y,int n){
         return ;
     }
     int mid = n/2;
-    de(mid);
+    // de(mid);
     for(int i = x;i < x +mid;i ++){
         for(int j = y;j < y + mid ;j ++ )
             mp[i][j] = 1;
