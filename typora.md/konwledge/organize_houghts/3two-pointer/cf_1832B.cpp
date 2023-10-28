@@ -7,6 +7,10 @@
 #define vi vector<i64>
 using namespace std;
 
+// URL ::
+// https://codeforces.com/problemset/problem/1832/B
+//
+
 
 void solve(){
     int n,k;
