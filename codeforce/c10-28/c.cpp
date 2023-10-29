@@ -33,13 +33,13 @@ void solve(){
                 j --;
             }else if(s[i] == s[j] && s[i] == '1'){
                 s.insert(s.begin()+i,ans.begin(),ans.end());
-                de(s)
-                res.push_back(i+1);
+                // de(s)
+                res.push_back(i);
                 j += 2;
                 // i ++;
             }else if(s[i] == s[j] && s[i] == '0'){
                 s.insert(s.begin()+j+1,ans.begin(),ans.end());
-                de(s)
+                // de(s)
                 // if(j == 7){return ;}
                 res.push_back(j+1);
                 j += 2;
