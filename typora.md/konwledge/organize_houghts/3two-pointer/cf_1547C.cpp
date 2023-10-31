@@ -4,6 +4,9 @@
 #define i64 long long
 using namespace std;
 
+/*https://codeforces.com/problemset/problem/1547/C*/
+
+
 void solve(){
     i64 k,n,m,ok = 1;
     cin >> k >> n >> m;

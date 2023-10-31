@@ -12,7 +12,12 @@
      -    条件：连续序列，且一旦超过某个上限条件前指针停止，后指针动，不可能出现后指针。或者换种说法，在不需要双指针的情况下，该题目的解已经可以写出，仅仅只需要双指针该算法来进行优化，并且双指针不会改变解题的逻辑。
      -    作用：双指针只能在上述条件中才能够使用
      -    技巧 : 就只要能够将前后指针移动的条件写清楚，就可以了（主要靠逻辑能力）
-     -    [例题一](https://codeforces.com/contest/1873/problem/F) 
+     -    [例题一](https://codeforces.com/contest/1873/problem/F)
+     -    [例题二](https://codeforces.com/problemset/problem/1656/B)
+     -    [例题三](https://codeforces.com/problemset/problem/1832/B)
+     -    [例题四](https://codeforces.com/problemset/problem/1547/C)
+     -    [例题五](https://codeforces.com/problemset/problem/489/B)
+     -    [例题六](https://codeforces.com/problemset/problem/1343/C)
      
 -    递归
 -    贪心和拟阵

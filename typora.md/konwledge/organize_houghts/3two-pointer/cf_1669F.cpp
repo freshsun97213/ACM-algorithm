@@ -6,6 +6,8 @@
 #define vi vector<int>
 using namespace std;
 
+/*https://codeforces.com/problemset/problem/1669/F*/
+
 
 void solve(){
 
